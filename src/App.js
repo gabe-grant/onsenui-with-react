@@ -87,9 +87,9 @@ function App() {
         </label>
       </div>
       <Ons.Select modifier="material"
-        // value={select}
+        defaultValue="select0"
         onChange={(event) => setSelect({ value: event.target.value })}>
-        <option value="select0" disabled selected>Select One</option>
+        <option value="select0" disabled>Select One</option>
         <option value="select1">First</option>
         <option value="select2">Second</option>
         <option value="select3">Third</option>
