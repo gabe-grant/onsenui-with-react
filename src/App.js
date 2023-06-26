@@ -9,6 +9,7 @@ function App() {
   const [radio, setRadio] = useState();
   const [checked, setChecked] = useState(false);
   const [select, setSelect] = useState(false);
+  // const [date, setDate] = useState('');
 
   const renderToolbar = () => {
     return (
@@ -35,28 +36,37 @@ function App() {
     <Ons.Page renderToolbar={renderToolbar}>
       <label>Name: </label>
       <Ons.Input
-        modifier='material'
         placeholder='type here'
         value={text}
         onChange={handleTextInput}
+        modifier='material'
       />
+      <div>
+      <label>Date: </label>
+        <Ons.Input
+          // value={date}
+          // onChange={(event) => setDate({ value: event.target.value })}
+          type='date'
+          modifier='material'
+        />
+      </div>
       <div className='radio-options'>
         <Ons.Radio
           onChange={handleRadioOption}
-          value="option1"
-          checked={radio === "option1"}
+          value='option1'
+          checked={radio === 'option1'}
           modifier='material'
         />
         <Ons.Radio
           onChange={handleRadioOption}
-          value="option2"
-          checked={radio === "option2"}
+          value='option2'
+          checked={radio === 'option2'}
           modifier='material'
         />
         <Ons.Radio
           onChange={handleRadioOption}
-          value="option3"
-          checked={radio === "option3"}
+          value='option3'
+          checked={radio === 'option3'}
           modifier='material'
         />
       </div>
@@ -86,16 +96,17 @@ function App() {
           Three
         </label>
       </div>
-      <Ons.Select modifier="material"
-        defaultValue="select0"
-        onChange={(event) => setSelect({ value: event.target.value })}>
-        <option value="select0" disabled>Select One</option>
-        <option value="select1">First</option>
-        <option value="select2">Second</option>
-        <option value="select3">Third</option>
+      <Ons.Select
+        defaultValue='select0'
+        onChange={(event) => setSelect({ value: event.target.value })}
+        modifier='material'>
+          <option value='select0' disabled>Select One</option>
+          <option value={select}>First</option>
+          <option value={select}>Second</option>
+          <option value={select}>Third</option>
       </Ons.Select>
       <div>
-        <Ons.Button modifier='material' onClick={handleClick}>Tap Me</Ons.Button>
+        <Ons.Button onClick={handleClick} modifier='material' >Tap Me</Ons.Button>
       </div>
     </Ons.Page>
   );
