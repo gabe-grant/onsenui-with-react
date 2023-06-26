@@ -33,85 +33,115 @@ function App() {
 
 
   return (
-    <Ons.Page renderToolbar={renderToolbar}>
-      <label>Name: </label>
-      <Ons.Input
-        placeholder='type here'
-        value={text}
-        onChange={handleTextInput}
-        modifier='material'
-      />
-      <div>
-      <label>Date: </label>
-        <Ons.Input
-          // value={date}
-          // onChange={(event) => setDate({ value: event.target.value })}
-          type='date'
-          modifier='material'
-        />
-      </div>
-      <div className='radio-options'>
-        <Ons.Radio
-          onChange={handleRadioOption}
-          value='option1'
-          checked={radio === 'option1'}
-          modifier='material'
-        />
-        <Ons.Radio
-          onChange={handleRadioOption}
-          value='option2'
-          checked={radio === 'option2'}
-          modifier='material'
-        />
-        <Ons.Radio
-          onChange={handleRadioOption}
-          value='option3'
-          checked={radio === 'option3'}
-          modifier='material'
-        />
-      </div>
-      <div className='checkbox-options'>
-        <label>
-          <Ons.Checkbox
-            checked={checked}
-            onChange={() => { setChecked(false); }}
-            modifier='material'
-          />
-          One
-        </label>
-        <label>
-          <Ons.Checkbox
-            checked={checked}
-            onChange={() => { setChecked(false); }}
-            modifier='material'
-          />
-          Two
-        </label>
-        <label>
-          <Ons.Checkbox
-            checked={checked}
-            onChange={() => { setChecked(false); }}
-            modifier='material'
-          />
-          Three
-        </label>
-      </div>
-      <Ons.Select
-        defaultValue='select0'
-        onChange={(event) => setSelect({ value: event.target.value })}
-        modifier='material'>
-          <option value='select0' disabled>Select One</option>
-          <option value={select}>First</option>
-          <option value={select}>Second</option>
-          <option value={select}>Third</option>
-      </Ons.Select>
-      <div>
-        <Ons.Button onClick={handleClick} modifier='material' >Tap Me</Ons.Button>
-      </div>
-    </Ons.Page>
+      <Ons.Page renderToolbar={renderToolbar} style={{ textAlign: 'center' }}>
+
+        <section >
+
+          <Ons.Card style={{ textAlign: 'center', width: '300px' }} modifier='material'>
+            <label htmlFor='textInput'>Name: </label>
+            <Ons.Input
+              id='textInput'
+              placeholder='type here'
+              value={text}
+              onChange={handleTextInput}
+              modifier='material'
+            />
+          </Ons.Card>
+
+          <Ons.Card style={{ textAlign: 'center', width: '300px' }} modifier='material'>
+            <label htmlFor='dateInput'>Date: </label>
+            <Ons.Input
+              id='dateInput'
+              // value={date}
+              // onChange={(event) => setDate({ value: event.target.value })}
+              type='date'
+              modifier='material'
+            />
+          </Ons.Card>
+
+          <Ons.Card style={{ textAlign: 'center', width: '300px' }} modifier='material'>
+            <div>
+              <Ons.Radio
+                id='radioOption1'
+                onChange={handleRadioOption}
+                value='option1'
+                checked={radio === 'option1'}
+                modifier='material'
+              />
+              <label htmlFor='radioOption3'> Radio1</label>
+            </div>
+            <div>
+              <Ons.Radio
+                id='radioOption2'
+                onChange={handleRadioOption}
+                value='option2'
+                checked={radio === 'option2'}
+                modifier='material'
+              />
+              <label htmlFor='radioOption3'> Radio3</label>
+            </div>
+            <div>
+              <Ons.Radio
+                id='radioOption3'
+                onChange={handleRadioOption}
+                value='option3'
+                checked={radio === 'option3'}
+                modifier='material'
+              />
+              <label htmlFor='radioOption3'> Radio3</label>
+            </div>
+          </Ons.Card>
+
+          <Ons.Card style={{ textAlign: 'center', width: '300px' }} modifier='material'>
+            <label htmlFor='checkbox1'>
+              <Ons.Checkbox
+                id='checkbox1'
+                checked={checked}
+                onChange={() => { setChecked(false); }}
+                modifier='material'
+              />
+              One
+            </label>
+            <label htmlFor='checkbox2'>
+              <Ons.Checkbox
+                checked={checked}
+                onChange={() => { setChecked(false); }}
+                modifier='material'
+              />
+              Two
+            </label>
+            <label htmlFor='checkbox3'>
+              <Ons.Checkbox
+                checked={checked}
+                onChange={() => { setChecked(false); }}
+                modifier='material'
+              />
+              Three
+            </label>
+          </Ons.Card>
+
+          <Ons.Card style={{ textAlign: 'center', width: '300px' }} modifier='material'>
+            <Ons.Select
+              defaultValue='select0'
+              onChange={(event) => setSelect({ value: event.target.value })}
+              modifier='material'>
+              <option value='select0' disabled>Select One</option>
+              <option value={select}>First</option>
+              <option value={select}>Second</option>
+              <option value={select}>Third</option>
+            </Ons.Select>
+          </Ons.Card>
+
+          <p style={{ textAlign: 'center' }}>
+            <Ons.Button onClick={handleClick} modifier='material' >Click Me</Ons.Button>
+          </p>
+
+        </section>
+
+      </Ons.Page>
   );
 }
 
 export default App;
 
-// onChange={event => { setCheckbox({checked: event.target.checked})} }
+// if you want to go quickly, go with friends; if you want to go far, go alone.
