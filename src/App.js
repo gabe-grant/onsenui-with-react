@@ -8,6 +8,7 @@ function App() {
   const [text, setText] = useState('');
   const [radio, setRadio] = useState();
   const [checked, setChecked] = useState(false);
+  const [select, setSelect] = useState(false);
 
   const renderToolbar = () => {
     return (
@@ -28,17 +29,17 @@ function App() {
   const handleRadioOption = (event) => {
     setRadio(event.target.value);
   };
-  
+
 
   return (
     <Ons.Page renderToolbar={renderToolbar}>
       <label>Name: </label>
-        <Ons.Input
-          modifier='material'
-          placeholder='type here'
-          value={text}
-          onChange={handleTextInput}
-        />
+      <Ons.Input
+        modifier='material'
+        placeholder='type here'
+        value={text}
+        onChange={handleTextInput}
+      />
       <div className='radio-options'>
         <Ons.Radio
           onChange={handleRadioOption}
@@ -66,7 +67,7 @@ function App() {
             onChange={() => { setChecked(false); }}
             modifier='material'
           />
-        One
+          One
         </label>
         <label>
           <Ons.Checkbox
@@ -74,7 +75,7 @@ function App() {
             onChange={() => { setChecked(false); }}
             modifier='material'
           />
-        Two
+          Two
         </label>
         <label>
           <Ons.Checkbox
@@ -85,7 +86,14 @@ function App() {
           Three
         </label>
       </div>
-      
+      <Ons.Select modifier="material"
+        // value={select}
+        onChange={(event) => setSelect({ value: event.target.value })}>
+        <option value="select0" disabled selected>Select One</option>
+        <option value="select1">First</option>
+        <option value="select2">Second</option>
+        <option value="select3">Third</option>
+      </Ons.Select>
       <div>
         <Ons.Button modifier='material' onClick={handleClick}>Tap Me</Ons.Button>
       </div>
