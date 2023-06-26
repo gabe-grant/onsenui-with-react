@@ -7,6 +7,7 @@ import { useState } from 'react';
 function App() {
   const [text, setText] = useState('');
   const [radio, setRadio] = useState();
+  const [checked, setChecked] = useState(false);
 
   const renderToolbar = () => {
     return (
@@ -20,45 +21,71 @@ function App() {
     ons.notification.alert('Hello world!');
   }
 
-  const handleChange = (event) => {
+  const handleTextInput = (event) => {
     setText(event.target.value);
   };
 
-  const handleRadio = (event) => {
+  const handleRadioOption = (event) => {
     setRadio(event.target.value);
   };
+  
 
   return (
     <Ons.Page renderToolbar={renderToolbar}>
-      <div>
+      <label>Name: </label>
+        <Ons.Input
+          modifier='material'
+          placeholder='type here'
+          value={text}
+          onChange={handleTextInput}
+        />
+      <div className='radio-options'>
         <Ons.Radio
-          onChange={handleRadio}
+          onChange={handleRadioOption}
           value="option1"
           checked={radio === "option1"}
           modifier='material'
         />
         <Ons.Radio
-          onChange={handleRadio}
+          onChange={handleRadioOption}
           value="option2"
           checked={radio === "option2"}
           modifier='material'
         />
         <Ons.Radio
-          onChange={handleRadio}
+          onChange={handleRadioOption}
           value="option3"
           checked={radio === "option3"}
           modifier='material'
         />
       </div>
-      <label>Input Text:</label>
-      <div>
-        <Ons.Input
-          modifier='material'
-          placeholder='type here'
-          value={text}
-          onChange={handleChange}
-        />
+      <div className='checkbox-options'>
+        <label>
+          <Ons.Checkbox
+            checked={checked}
+            onChange={() => { setChecked(false); }}
+            modifier='material'
+          />
+        One
+        </label>
+        <label>
+          <Ons.Checkbox
+            checked={checked}
+            onChange={() => { setChecked(false); }}
+            modifier='material'
+          />
+        Two
+        </label>
+        <label>
+          <Ons.Checkbox
+            checked={checked}
+            onChange={() => { setChecked(false); }}
+            modifier='material'
+          />
+          Three
+        </label>
       </div>
+      
       <div>
         <Ons.Button modifier='material' onClick={handleClick}>Tap Me</Ons.Button>
       </div>
@@ -67,3 +94,5 @@ function App() {
 }
 
 export default App;
+
+// onChange={event => { setCheckbox({checked: event.target.checked})} }
