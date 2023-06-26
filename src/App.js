@@ -25,22 +25,29 @@ function App() {
   };
 
   const handleRadio = (event) => {
-    setRadio(event.target.checked);
+    setRadio(event.target.value);
   };
 
   return (
     <Ons.Page renderToolbar={renderToolbar}>
-      <div onChange={handleRadio}>
+      <div>
         <Ons.Radio
-          modifier='material' 
-        />
-        <Ons.Radio
-          checked={radio}
+          onChange={handleRadio}
+          value="option1"
+          checked={radio === "option1"}
           modifier='material'
         />
         <Ons.Radio
-          checked={radio}
-          modifier='material' 
+          onChange={handleRadio}
+          value="option2"
+          checked={radio === "option2"}
+          modifier='material'
+        />
+        <Ons.Radio
+          onChange={handleRadio}
+          value="option3"
+          checked={radio === "option3"}
+          modifier='material'
         />
       </div>
       <label>Input Text:</label>
