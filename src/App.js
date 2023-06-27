@@ -28,7 +28,7 @@ function App() {
 
   const handleBackClick = (event, navigator) => {
     event.preventDefault();
-    ons.notification.confirm('Do you really want to go back?')
+    ons.notification.confirm('This will take you back to the input page!')
       .then((response) => {
         if (response === 1) {
           navigator.popPage();
