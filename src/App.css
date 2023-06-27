@@ -1,6 +1,14 @@
 .content-card {
-  
   display: flex;
   justify-content: center;
+  align-items: center;
+}
+
+/* .content-card {
+  display: flex;
+  justify-content: center;
+} */
+
+.input-cards {
   align-items: center;
 }

@@ -9,7 +9,7 @@ import { useState } from 'react';
 function App() {
   const [text, setText] = useState('');
   const [radio, setRadio] = useState();
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState([false, false, false]);
   const [select, setSelect] = useState(false);
   // const [date, setDate] = useState('');
 
@@ -17,7 +17,7 @@ function App() {
     const backButton = route.hasBackButton
       ? <Ons.BackButton onClick={event => handleBackClick(event, navigator)}>Back</Ons.BackButton>
       : null;
-    
+
     const pushButton = route.hasPushButton
       ? <Ons.Button onClick={event => pushPage(navigator)}>Next</Ons.Button>
       : null;
@@ -26,7 +26,7 @@ function App() {
       <Ons.Toolbar>
         <div className='left'>{backButton}</div>
         <div className='center'>{route.title}</div>
-        <div className='right'>{pushButton}</div>
+        <div className='right' style={{ paddingRight: '.60em' }}>{pushButton}</div>
       </Ons.Toolbar>
     );
   };
@@ -48,9 +48,17 @@ function App() {
       hasPushButton: false
     });
 
+  const handleChecked = (position) => {
+    const updateCheckedState = checked.map((item, index) =>
+      index === position ? !item : item
+    );
+
+    setChecked(updateCheckedState);
+  };
+
   const renderPage = (route, navigator) => (
     <Ons.Page key={route.title} renderToolbar={() => renderToolbar(route, navigator)}>
-      <section>
+      <section className='input-cards'>
 
         <div className='content-card'>
           <Ons.Card modifier='material'>
@@ -118,22 +126,22 @@ function App() {
             <label htmlFor='checkbox1'>One </label>
             <Ons.Checkbox
               id='checkbox1'
-              checked={checked}
-              onChange={() => { setChecked(false); }}
+              checked={checked[0]}
+              onChange={() => { handleChecked(0) }}
               modifier='material'
             />
             <label htmlFor='checkbox2'> Two </label>
             <Ons.Checkbox
               id='checkbox2'
-              checked={checked}
-              onChange={() => { setChecked(false); }}
+              checked={checked[1]}
+              onChange={() => { handleChecked(1) }}
               modifier='material'
             />
             <label htmlFor='checkbox3'> Three </label>
             <Ons.Checkbox
               id='checkbox3'
-              checked={checked}
-              onChange={() => { setChecked(false); }}
+              checked={checked[2]}
+              onChange={() => { handleChecked(2) }}
               modifier='material'
             />
           </Ons.Card>
@@ -153,11 +161,11 @@ function App() {
           </Ons.Card>
         </div>
 
-        {/* <p className='content-card'>
-          <Ons.Button onClick={() => pushPage(navigator)} modifier='material' >
-            Push Page
+        <p className='content-card'>
+          <Ons.Button onClick={() => window.location.reload()} modifier='material' >
+           Refresh
           </Ons.Button>
-        </p> */}
+        </p>
 
       </section>
     </Ons.Page>
