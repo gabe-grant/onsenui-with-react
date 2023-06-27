@@ -15,7 +15,7 @@ function App() {
 
   const renderToolbar = (route, navigator) => {
     const backButton = route.hasBackButton
-      ? <Ons.BackButton onClick={event => handleClick(event, navigator)}>Back</Ons.BackButton>
+      ? <Ons.BackButton onClick={event => handleBackClick(event, navigator)}>Back</Ons.BackButton>
       : null;
 
     return (
@@ -26,7 +26,7 @@ function App() {
     );
   };
 
-  const handleClick = (event, navigator) => {
+  const handleBackClick = (event, navigator) => {
     event.preventDefault();
     ons.notification.confirm('Do you really want to go back?')
       .then((response) => {
@@ -43,9 +43,7 @@ function App() {
     });
 
   const renderPage = (route, navigator) => (
-
     <Ons.Page key={route.title} renderToolbar={() => renderToolbar(route, navigator)}>
-
       <section>
 
         <div className='content-card'>
@@ -150,11 +148,12 @@ function App() {
         </div>
 
         <p className='content-card'>
-          <Ons.Button onClick={() => pushPage(navigator)} modifier='material' >Push Page</Ons.Button>
+          <Ons.Button onClick={() => pushPage(navigator)} modifier='material' >
+            Push Page
+          </Ons.Button>
         </p>
 
       </section>
-
     </Ons.Page>
   );
 
