@@ -13,29 +13,38 @@ function App() {
   const [select, setSelect] = useState(false);
   // const [date, setDate] = useState('');
 
-  const renderToolbar = () => {
+  const renderToolbar = (route, navigator) => {
+    const backButton = route.hasBackButton
+      ? <Ons.BackButton onClick={event => handleClick(event, navigator)}>Back</Ons.BackButton>
+      : null;
+
     return (
       <Ons.Toolbar>
-        <div className='center'>My Simple App</div>
+        <div className='left'>{backButton}</div>
+        <div className='center'>{route.title}</div>
       </Ons.Toolbar>
     );
-  }
-
-  const handleClick = () => {
-    ons.notification.alert('Hello world!');
-  }
-
-  const handleTextInput = (event) => {
-    setText(event.target.value);
   };
 
-  const handleRadioOption = (event) => {
-    setRadio(event.target.value);
+  const handleClick = (event, navigator) => {
+    event.preventDefault();
+    ons.notification.confirm('Do you really want to go back?')
+      .then((response) => {
+        if (response === 1) {
+          navigator.popPage();
+        }
+      });
   };
 
+  const pushPage = navigator =>
+    navigator.pushPage({
+      title: 'Output Page',
+      hasBackButton: true
+    });
 
-  return (
-    <Ons.Page renderToolbar={renderToolbar}>
+  const renderPage = (route, navigator) => (
+
+    <Ons.Page key={route.title} renderToolbar={() => renderToolbar(route, navigator)}>
 
       <section>
 
@@ -46,7 +55,7 @@ function App() {
               id='textInput'
               placeholder='type here'
               value={text}
-              onChange={handleTextInput}
+              onChange={(event) => { setText(event.target.value); }}
               modifier='material'
             />
           </Ons.Card>
@@ -70,32 +79,32 @@ function App() {
             <div>
               <Ons.Radio
                 id='radioOption1'
-                onChange={handleRadioOption}
+                onChange={(event) => { setRadio(event.target.value); }}
                 value='option1'
                 checked={radio === 'option1'}
                 modifier='material'
               />
-              <label htmlFor='radioOption3'> Radio1</label>
+              <label htmlFor='radioOption3'> Radio 1</label>
             </div>
             <div>
               <Ons.Radio
                 id='radioOption2'
-                onChange={handleRadioOption}
+                onChange={(event) => { setRadio(event.target.value); }}
                 value='option2'
                 checked={radio === 'option2'}
                 modifier='material'
               />
-              <label htmlFor='radioOption3'> Radio3</label>
+              <label htmlFor='radioOption3'> Radio 2</label>
             </div>
             <div>
               <Ons.Radio
                 id='radioOption3'
-                onChange={handleRadioOption}
+                onChange={(event) => { setRadio(event.target.value); }}
                 value='option3'
                 checked={radio === 'option3'}
                 modifier='material'
               />
-              <label htmlFor='radioOption3'> Radio3</label>
+              <label htmlFor='radioOption3'> Radio 3</label>
             </div>
           </Ons.Card>
         </div>
@@ -141,13 +150,25 @@ function App() {
         </div>
 
         <p className='content-card'>
-          <Ons.Button onClick={handleClick} modifier='material' >Click Me</Ons.Button>
+          <Ons.Button onClick={() => pushPage(navigator)} modifier='material' >Push Page</Ons.Button>
         </p>
 
       </section>
 
     </Ons.Page>
   );
+
+  return (
+    <Ons.Navigator
+      swipeable
+      renderPage={renderPage}
+      initialRoute={{
+        title: 'Input Page',
+        hasBackButton: false
+      }}
+    />
+  );
+
 }
 
 export default App;
