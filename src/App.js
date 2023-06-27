@@ -2,6 +2,8 @@ import ons from 'onsenui';
 import * as Ons from 'react-onsenui';
 import 'onsenui/css/onsenui.css';
 import 'onsenui/css/onsen-css-components.css';
+
+import './App.css'
 import { useState } from 'react';
 
 function App() {
@@ -33,112 +35,118 @@ function App() {
 
 
   return (
-      <Ons.Page renderToolbar={renderToolbar} style={{ textAlign: 'center' }}>
+    <Ons.Page renderToolbar={renderToolbar}>
 
-        <section >
+    <section>
 
-          <Ons.Card style={{ textAlign: 'center', width: '300px' }} modifier='material'>
-            <label htmlFor='textInput'>Name: </label>
-            <Ons.Input
-              id='textInput'
-              placeholder='type here'
-              value={text}
-              onChange={handleTextInput}
+      <div className='content-card'>
+        <Ons.Card modifier='material'>
+          <label htmlFor='textInput'>Name: </label>
+          <Ons.Input
+            id='textInput'
+            placeholder='type here'
+            value={text}
+            onChange={handleTextInput}
+            modifier='material'
+          />
+        </Ons.Card>
+      </div>
+
+      <div className='content-card'>
+        <Ons.Card modifier='material'>
+          <label htmlFor='dateInput'>Date: </label>
+          <Ons.Input
+            id='dateInput'
+            // value={date}
+            // onChange={(event) => setDate({ value: event.target.value })}
+            type='date'
+            modifier='material'
+          />
+        </Ons.Card>
+      </div>
+
+      <div className='content-card'>
+        <Ons.Card modifier='material'>
+          <div>
+            <Ons.Radio
+              id='radioOption1'
+              onChange={handleRadioOption}
+              value='option1'
+              checked={radio === 'option1'}
               modifier='material'
             />
-          </Ons.Card>
-
-          <Ons.Card style={{ textAlign: 'center', width: '300px' }} modifier='material'>
-            <label htmlFor='dateInput'>Date: </label>
-            <Ons.Input
-              id='dateInput'
-              // value={date}
-              // onChange={(event) => setDate({ value: event.target.value })}
-              type='date'
+            <label htmlFor='radioOption3'> Radio1</label>
+          </div>
+          <div>
+            <Ons.Radio
+              id='radioOption2'
+              onChange={handleRadioOption}
+              value='option2'
+              checked={radio === 'option2'}
               modifier='material'
             />
-          </Ons.Card>
+            <label htmlFor='radioOption3'> Radio3</label>
+          </div>
+          <div>
+            <Ons.Radio
+              id='radioOption3'
+              onChange={handleRadioOption}
+              value='option3'
+              checked={radio === 'option3'}
+              modifier='material'
+            />
+            <label htmlFor='radioOption3'> Radio3</label>
+          </div>
+        </Ons.Card>
+      </div>
 
-          <Ons.Card style={{ textAlign: 'center', width: '300px' }} modifier='material'>
-            <div>
-              <Ons.Radio
-                id='radioOption1'
-                onChange={handleRadioOption}
-                value='option1'
-                checked={radio === 'option1'}
-                modifier='material'
-              />
-              <label htmlFor='radioOption3'> Radio1</label>
-            </div>
-            <div>
-              <Ons.Radio
-                id='radioOption2'
-                onChange={handleRadioOption}
-                value='option2'
-                checked={radio === 'option2'}
-                modifier='material'
-              />
-              <label htmlFor='radioOption3'> Radio3</label>
-            </div>
-            <div>
-              <Ons.Radio
-                id='radioOption3'
-                onChange={handleRadioOption}
-                value='option3'
-                checked={radio === 'option3'}
-                modifier='material'
-              />
-              <label htmlFor='radioOption3'> Radio3</label>
-            </div>
-          </Ons.Card>
+      <div className='content-card'>
+        <Ons.Card modifier='material'>
+          <label htmlFor='checkbox1'>One </label>
+            <Ons.Checkbox
+              id='checkbox1'
+              checked={checked}
+              onChange={() => { setChecked(false); }}
+              modifier='material'
+            />
+          <label htmlFor='checkbox2'> Two </label>
+            <Ons.Checkbox
+              id='checkbox2'
+              checked={checked}
+              onChange={() => { setChecked(false); }}
+              modifier='material'
+            />
+          <label htmlFor='checkbox3'> Three </label>
+            <Ons.Checkbox
+              id='checkbox3'
+              checked={checked}
+              onChange={() => { setChecked(false); }}
+              modifier='material'
+            />
+        </Ons.Card>
+      </div>
 
-          <Ons.Card style={{ textAlign: 'center', width: '300px' }} modifier='material'>
-            <label htmlFor='checkbox1'>
-              <Ons.Checkbox
-                id='checkbox1'
-                checked={checked}
-                onChange={() => { setChecked(false); }}
-                modifier='material'
-              />
-              One
-            </label>
-            <label htmlFor='checkbox2'>
-              <Ons.Checkbox
-                checked={checked}
-                onChange={() => { setChecked(false); }}
-                modifier='material'
-              />
-              Two
-            </label>
-            <label htmlFor='checkbox3'>
-              <Ons.Checkbox
-                checked={checked}
-                onChange={() => { setChecked(false); }}
-                modifier='material'
-              />
-              Three
-            </label>
-          </Ons.Card>
+      <div className='content-card'>
+        <Ons.Card modifier='material'>
+          <Ons.Select
+            defaultValue='select0'
+            onChange={(event) => setSelect({ value: event.target.value })}
+            modifier='material'>
+            <option value='select0' disabled>Select One</option>
+            <option value={select}>First</option>
+            <option value={select}>Second</option>
+            <option value={select}>Third</option>
+          </Ons.Select>
+        </Ons.Card>
+      </div>
 
-          <Ons.Card style={{ textAlign: 'center', width: '300px' }} modifier='material'>
-            <Ons.Select
-              defaultValue='select0'
-              onChange={(event) => setSelect({ value: event.target.value })}
-              modifier='material'>
-              <option value='select0' disabled>Select One</option>
-              <option value={select}>First</option>
-              <option value={select}>Second</option>
-              <option value={select}>Third</option>
-            </Ons.Select>
-          </Ons.Card>
+      <p className='content-card'>
+        <Ons.Button onClick={handleClick} modifier='material' >Click Me</Ons.Button>
+      </p>
 
-          <p style={{ textAlign: 'center' }}>
-            <Ons.Button onClick={handleClick} modifier='material' >Click Me</Ons.Button>
-          </p>
+      </section>
 
-        </section>
-
-      </Ons.Page>
+    </Ons.Page>
   );
 }
 
