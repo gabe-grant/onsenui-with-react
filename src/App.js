@@ -17,18 +17,23 @@ function App() {
     const backButton = route.hasBackButton
       ? <Ons.BackButton onClick={event => handleBackClick(event, navigator)}>Back</Ons.BackButton>
       : null;
+    
+    const pushButton = route.hasPushButton
+      ? <Ons.Button onClick={event => pushPage(navigator)}>Next</Ons.Button>
+      : null;
 
     return (
       <Ons.Toolbar>
         <div className='left'>{backButton}</div>
         <div className='center'>{route.title}</div>
+        <div className='right'>{pushButton}</div>
       </Ons.Toolbar>
     );
   };
 
   const handleBackClick = (event, navigator) => {
     event.preventDefault();
-    ons.notification.confirm('This will take you back to the input page!')
+    ons.notification.confirm('Back to the input page?')
       .then((response) => {
         if (response === 1) {
           navigator.popPage();
@@ -39,7 +44,8 @@ function App() {
   const pushPage = navigator =>
     navigator.pushPage({
       title: 'Output Page',
-      hasBackButton: true
+      hasBackButton: true,
+      hasPushButton: false
     });
 
   const renderPage = (route, navigator) => (
@@ -147,11 +153,11 @@ function App() {
           </Ons.Card>
         </div>
 
-        <p className='content-card'>
+        {/* <p className='content-card'>
           <Ons.Button onClick={() => pushPage(navigator)} modifier='material' >
             Push Page
           </Ons.Button>
-        </p>
+        </p> */}
 
       </section>
     </Ons.Page>
@@ -163,7 +169,8 @@ function App() {
       renderPage={renderPage}
       initialRoute={{
         title: 'Input Page',
-        hasBackButton: false
+        hasBackButton: false,
+        hasPushButton: true
       }}
     />
   );
