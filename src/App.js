@@ -19,15 +19,10 @@ function App() {
       ? <Ons.BackButton onClick={event => handleBackClick(event, navigator)}>Back</Ons.BackButton>
       : null;
 
-    const pushButton = route.hasPushButton
-      ? <Ons.Button onClick={event => pushPage(navigator)}>Next</Ons.Button>
-      : null;
-
     return (
       <Ons.Toolbar>
         <div className='left'>{backButton}</div>
         <div className='center'>{route.title}</div>
-        <div className='right' style={{ paddingRight: '.60em' }}>{pushButton}</div>
       </Ons.Toolbar>
     );
   };
@@ -46,7 +41,7 @@ function App() {
     navigator.pushPage({
       title: 'Output Page',
       hasBackButton: true,
-      hasPushButton: false
+      hasSubmitButton: false
     });
 
   const handleChecked = (position) => {
@@ -56,11 +51,11 @@ function App() {
     setChecked(updateCheckedState);
   };
 
-  const handleSubmit = (event) => {
-    console.log(
-      text, radio, checked, select
-    );
-  };
+  // const handleSubmit = (event) => {
+  //   console.log(
+  //     text, radio, checked, select
+  //   );
+  // };
 
   // const handleImageSearch = () => {
   //   console.log(searchImages());
@@ -171,12 +166,16 @@ function App() {
             </Ons.Select>
           </Ons.Card>
         </div>
-
+       
         <p className='content-card'>
-          <Ons.Button onClick={() => { handleSubmit() }} modifier='material' >
-            Sumbmit
-          </Ons.Button>
+          <Ons.Button onClick={() => pushPage(navigator)}>Submit</Ons.Button>
         </p>
+
+        {/* <p className='content-card'>
+          <Ons.Button onClick={() => { handleSubmit() }} modifier='material' >
+            Submit
+          </Ons.Button>
+        </p> */}
 
       </form>
     </Ons.Page>
@@ -189,7 +188,7 @@ function App() {
       initialRoute={{
         title: 'Input Page',
         hasBackButton: false,
-        hasPushButton: true
+        hasSubmitButton: true
       }}
     />
   );
