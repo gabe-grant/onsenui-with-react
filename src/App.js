@@ -9,7 +9,7 @@ import { useState } from 'react';
 
 function App() {
   const [text, setText] = useState('');
-  // const [date, setDate] = useState('');
+  const [date, setDate] = useState('');
   const [checked, setChecked] = useState([false, false, false]);
   const [radio, setRadio] = useState();
   const [select, setSelect] = useState('option0');
@@ -77,7 +77,7 @@ function App() {
               id='textInput'
               placeholder='type here'
               value={text}
-              onChange={(event) => { setText(event.target.value); }}
+              onChange={event => setText(event.target.value)}
               modifier='material'
             />
           </Ons.Card>
@@ -88,8 +88,8 @@ function App() {
             <label htmlFor='dateInput'>Date: </label>
             <Ons.Input
               id='dateInput'
-              // value={date}
-              // onChange={(event) => setDate({ value: event.target.value })}
+              value={date}
+              onChange={event => setDate(event.target.value)}
               type='date'
               modifier='material'
             />
