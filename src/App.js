@@ -1,7 +1,8 @@
 import ons from 'onsenui';
 import * as Ons from 'react-onsenui';
 import 'onsenui/css/onsenui.css';
-import 'onsenui/css/onsen-css-components.css';
+// import 'onsenui/css/onsen-css-components.css';
+import 'onsenui/css/dark-onsen-css-components.css'
 
 import './App.css'
 import searchImages from './api';
@@ -155,6 +156,7 @@ function App() {
         <div className='content-card'>
           <Ons.Card modifier='material'>
             <Ons.Select
+              id='select-input'
               defaultValue={select}
               // value={select}
               onChange={event => setSelect(event.target.value) }
