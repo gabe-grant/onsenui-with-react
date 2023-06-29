@@ -20,17 +20,22 @@ function App() {
       ? <Ons.BackButton onClick={event => handleBackClick(event, navigator)}>Back</Ons.BackButton>
       : null;
 
+    const reviewButton = route.hasReviewButton
+      ? <Ons.Button onClick={() => pushPage(navigator)}>Review</Ons.Button>
+      : null;
+
     return (
       <Ons.Toolbar>
         <div className='left'>{backButton}</div>
         <div className='center'>{route.title}</div>
+        <div className='right'>{reviewButton}</div>
       </Ons.Toolbar>
     );
   };
 
   const handleBackClick = (event, navigator) => {
     event.preventDefault();
-    ons.notification.confirm('Back to the input page?')
+    ons.notification.confirm('Are you sure?')
       .then((response) => {
         if (response === 1) {
           navigator.popPage();
@@ -40,9 +45,9 @@ function App() {
 
   const pushPage = navigator =>
     navigator.pushPage({
-      title: 'Output Page',
+      title: 'Review Entry',
       hasBackButton: true,
-      hasSubmitButton: false
+      hasPreviewButton: false
     });
 
   const handleChecked = (position) => {
@@ -54,7 +59,7 @@ function App() {
 
   // const handleSubmit = (event) => {
   //   console.log(
-  //     text, radio, checked, select
+  //     text, date, radio, checked, select
   //   );
   // };
 
@@ -68,20 +73,7 @@ function App() {
 
         <div className='content-card'>
           <Ons.Card modifier='material'>
-            <label htmlFor='textInput'>Name: </label>
-            <Ons.Input
-              id='textInput'
-              placeholder='type here'
-              value={text}
-              onChange={event => setText(event.target.value)}
-              modifier='material'
-            />
-          </Ons.Card>
-        </div>
-
-        <div className='content-card'>
-          <Ons.Card modifier='material'>
-            <label htmlFor='dateInput'>Date: </label>
+            <label htmlFor='dateInput'>Today's Date: </label>
             <Ons.Input
               id='dateInput'
               value={date}
@@ -162,10 +154,23 @@ function App() {
               onChange={event => setSelect(event.target.value) }
               modifier='material'>
               <option value='option0' hidden>select a value</option>
-              <option value='option1'>First</option>
-              <option value='option2'>Second</option>
-              <option value='option3'>Third</option>
+              <option style={{backgroundColor: 'darkgray'}} value='option1'>First</option>
+              <option style={{backgroundColor: 'darkgray'}} value='option2'>Second</option>
+              <option style={{backgroundColor: 'darkgray'}} value='option3'>Third</option>
             </Ons.Select>
+          </Ons.Card>
+        </div>
+
+        <div className='content-card'>
+          <Ons.Card modifier='material'>
+            <label htmlFor='textInput'>waiting: </label>
+            <Ons.Input
+              id='textInput'
+              placeholder='type here'
+              value={text}
+              onChange={event => setText(event.target.value)}
+              modifier='material'
+            />
           </Ons.Card>
         </div>
        
@@ -188,9 +193,9 @@ function App() {
       swipeable
       renderPage={renderPage}
       initialRoute={{
-        title: 'Input Page',
+        title: 'Daily Journal',
         hasBackButton: false,
-        hasSubmitButton: true
+        hasReviewButton: true
       }}
     />
   );
