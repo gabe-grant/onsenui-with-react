@@ -6,6 +6,7 @@ import 'onsenui/css/dark-onsen-css-components.css'
 
 import './App.css'
 import searchImages from './api';
+import ImageList from './components/ImageList';
 import { useState } from 'react';
 
 function App() {
@@ -14,7 +15,8 @@ function App() {
   const [checked, setChecked] = useState([false, false, false]);
   const [radio, setRadio] = useState();
   const [select, setSelect] = useState('option0');
-  
+  const [images, setImages] = useState([]);
+
   const renderToolbar = (route, navigator) => {
     const backButton = route.hasBackButton
       ? <Ons.BackButton onClick={event => handleBackClick(event, navigator)}>Back</Ons.BackButton>
@@ -63,9 +65,11 @@ function App() {
   //   );
   // };
 
-  // const handleImageSearch = () => {
-  //   console.log(searchImages());
-  // }
+  const handleImages = async () => {
+    const result = await searchImages();
+    console.log(result);
+    setImages(result);
+  };
 
   const renderPage = (route, navigator) => (
     <Ons.Page key={route.title} renderToolbar={() => renderToolbar(route, navigator)}>
@@ -86,21 +90,21 @@ function App() {
 
         <div className='content-card'>
           <Ons.Card modifier='material'>
-            <label htmlFor='checkbox1'>One </label>
+            <label htmlFor='checkbox1'>Meditate? </label>
             <Ons.Checkbox
               id='checkbox1'
               checked={checked[0]}
               onChange={() => { handleChecked(0) }}
               modifier='material'
             />
-            <label htmlFor='checkbox2'> Two </label>
+            <label htmlFor='checkbox2'> Exercise? </label>
             <Ons.Checkbox
               id='checkbox2'
               checked={checked[1]}
               onChange={() => { handleChecked(1) }}
               modifier='material'
             />
-            <label htmlFor='checkbox3'> Three </label>
+            <label htmlFor='checkbox3'> Create? </label>
             <Ons.Checkbox
               id='checkbox3'
               checked={checked[2]}
@@ -113,6 +117,9 @@ function App() {
         <div className='content-card'>
           <Ons.Card modifier='material'>
             <div>
+              How well did you sleep?
+            </div>
+            <div style={{ paddingTop: '.75em' }}>
               <Ons.Radio
                 id='radioOption1'
                 onChange={(event) => { setRadio(event.target.value); }}
@@ -120,7 +127,7 @@ function App() {
                 checked={radio === 'radio1'}
                 modifier='material'
               />
-              <label htmlFor='radioOption3'> Radio 1</label>
+              <label htmlFor='radioOption3'> Great</label>
             </div>
             <div>
               <Ons.Radio
@@ -130,7 +137,7 @@ function App() {
                 checked={radio === 'radio2'}
                 modifier='material'
               />
-              <label htmlFor='radioOption3'> Radio 2</label>
+              <label htmlFor='radioOption3'> Okay</label>
             </div>
             <div>
               <Ons.Radio
@@ -140,30 +147,33 @@ function App() {
                 checked={radio === 'radio3'}
                 modifier='material'
               />
-              <label htmlFor='radioOption3'> Radio 3</label>
+              <label htmlFor='radioOption3'> Bad</label>
             </div>
           </Ons.Card>
         </div>
 
         <div className='content-card'>
           <Ons.Card modifier='material'>
+            <div>
+              What was today's primary focus?
+            </div>
             <Ons.Select
               id='select-input'
               defaultValue={select}
               // value={select}
-              onChange={event => setSelect(event.target.value) }
+              onChange={event => setSelect(event.target.value)}
               modifier='material'>
               <option value='option0' hidden>select a value</option>
-              <option style={{backgroundColor: 'darkgray'}} value='option1'>First</option>
-              <option style={{backgroundColor: 'darkgray'}} value='option2'>Second</option>
-              <option style={{backgroundColor: 'darkgray'}} value='option3'>Third</option>
+              <option style={{ backgroundColor: 'darkgray' }} value='option1'>Happiness</option>
+              <option style={{ backgroundColor: 'darkgray' }} value='option2'>Health</option>
+              <option style={{ backgroundColor: 'darkgray' }} value='option3'>Wealth</option>
             </Ons.Select>
           </Ons.Card>
         </div>
 
         <div className='content-card'>
           <Ons.Card modifier='material'>
-            <label htmlFor='textInput'>waiting: </label>
+            <label htmlFor='textInput'>Notes: </label>
             <Ons.Input
               id='textInput'
               placeholder='type here'
@@ -173,16 +183,20 @@ function App() {
             />
           </Ons.Card>
         </div>
-       
-        <p className='content-card'>
-          <Ons.Button onClick={() => pushPage(navigator)}>Submit</Ons.Button>
-        </p>
 
         {/* <p className='content-card'>
-          <Ons.Button onClick={() => { handleSubmit() }} modifier='material' >
-            Submit
-          </Ons.Button>
+          <Ons.Button onClick={() => {handleSubmit()}}>Submit</Ons.Button>
         </p> */}
+
+        <p className='content-card'>
+          <Ons.Button onClick={() => { handleImages() }} modifier='material' >
+            Generate Image
+          </Ons.Button>
+        </p>
+
+        <div className='content-card'>
+          <ImageList images={images} />
+        </div>
 
       </form>
     </Ons.Page>
