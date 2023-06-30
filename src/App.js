@@ -6,7 +6,6 @@ import 'onsenui/css/dark-onsen-css-components.css'
 
 import './App.css'
 import searchImages from './api';
-import ImageList from './components/ImageList';
 import { useState } from 'react';
 
 function App() {
@@ -15,7 +14,8 @@ function App() {
   const [checked, setChecked] = useState([false, false, false]);
   const [radio, setRadio] = useState();
   const [select, setSelect] = useState('option0');
-  const [images, setImages] = useState([]);
+  const [image, setImage] = useState([]);
+  const [isLoading, setisLoading] = useState(true);
 
   const renderToolbar = (route, navigator) => {
     const backButton = route.hasBackButton
@@ -66,9 +66,10 @@ function App() {
   // };
 
   const handleImages = async () => {
-    const result = await searchImages();
-    console.log(result);
-    setImages(result);
+    const results = await searchImages();
+    const randomPick = results[Math.floor(results.length * Math.random())];
+    setImage(randomPick);
+    setisLoading(false);
   };
 
   const renderPage = (route, navigator) => (
@@ -188,6 +189,8 @@ function App() {
           <Ons.Button onClick={() => {handleSubmit()}}>Submit</Ons.Button>
         </p> */}
 
+        <p className='content-card'>What image fits you today?</p>
+
         <p className='content-card'>
           <Ons.Button onClick={() => { handleImages() }} modifier='material' >
             Generate Image
@@ -195,7 +198,15 @@ function App() {
         </p>
 
         <div className='content-card'>
-          <ImageList images={images} />
+          {isLoading ? (
+            <div>
+              <span className='sr-only'>Loading...</span>
+            </div>
+          ) : (
+            <Ons.Card>
+              <img key={image.id} src={image.urls.thumb} alt={image.alt_description} />
+            </Ons.Card>
+          )}
         </div>
 
       </form>
