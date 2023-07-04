@@ -1,5 +1,5 @@
 
-## Procedure
+## Procedure (must have NodeJS installed)
 
 Clone the repository into a directory on your local machine and run:
 
