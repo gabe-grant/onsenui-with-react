@@ -1,7 +1,9 @@
 
-## Available Scripts
+## Procedure
 
-In the project directory, you can run:
+Clone the repository into a directory on your local maching and run:
+
+### `npm install`
 
 ### `npm start`
 
