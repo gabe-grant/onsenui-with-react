@@ -1,7 +1,7 @@
 
 ## Procedure
 
-Clone the repository into a directory on your local maching and run:
+Clone the repository into a directory on your local machine and run:
 
 ### `npm install`
 
